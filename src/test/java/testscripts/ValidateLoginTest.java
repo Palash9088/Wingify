@@ -14,7 +14,7 @@ public class ValidateLoginTest extends TestBase {
 
     //Validate that the user is able to navigate to the login page.
     @Test
-    public void validateUserIsAbleToAccessUrlAndOnRightPage() {
+    public void validateUserIsAbleToAccessUrlAndLandsOnTheLoginPage() {
         LoginPage loginPage = LoginPage.getLoginPage();
         Assert.assertEquals(loginPage.getUrl(),
                 "https://sakshingp.github.io/assignment/login.html",
@@ -23,6 +23,27 @@ public class ValidateLoginTest extends TestBase {
                 "User is not on Login page");
     }
 
+    //Validate loginPage logo is visible
+    @Test
+    public void validateLoginPageLogoVisibility()
+    {
+        LoginPage loginPage = LoginPage.getLoginPage();
+        Assert.assertTrue(loginPage.isLogoPresent(),"Logo not visible");
+    }
+    @Test
+    public void validateSocialMediaLoginIcons()
+    {
+        LoginPage loginPage = LoginPage.getLoginPage();
+        log.info(loginPage.isSocialMediaLoginIcons());
+    }
+    //Validate username & Password icons are visible
+    @Test
+    public void validateUsernameAndPasswordIcon(){
+        LoginPage loginPage = LoginPage.getLoginPage();
+        Assert.assertTrue(loginPage.isUsernameIconPresent());
+        Assert.assertTrue(loginPage.isPasswordIconPresent());
+
+    }
     //Validate username & Password field is enabled
     @Test
     public void validateUsernameAndPasswordFieldEnabled() {
@@ -88,8 +109,18 @@ public class ValidateLoginTest extends TestBase {
         PredefinedActions.navigateBack();
         Assert.assertEquals(loginPage.getUsername(), loginPageCred.get(0),
                 "Remember me function is not working correctly");
+        loginPage.clickOnLoginBtn();
     }
 
+    //Validate login with username & password
+    @Test
+    public void validateLoginWithWhiteSpaces() {
+        LoginPage loginPage = LoginPage.getLoginPage();
+        loginPage.enterCredentials("    ", "    ");
+        loginPage.clickOnLoginBtn();
+        Assert.assertNotEquals(loginPage.getUrl(), "https://sakshingp.github.io/assignment/login.html",
+                "User has logged in homepage");
+    }
     //Validate login with username & password
     @Test
     public void validateLogin() {
@@ -110,6 +141,5 @@ public class ValidateLoginTest extends TestBase {
         homePage.clickOnAmountHead();
         log.info("Amount List After click on Table head -> " + homePage.getAmountList());
         Assert.assertTrue(homePage.isAmountListSorted(),"List is not sorted");
-
     }
 }

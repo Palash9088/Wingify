@@ -58,16 +58,23 @@ public class PredefinedActions {
         log.trace("User able to open the " + url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
+
     public static void refreshTab() {
         driver.get(driver.getCurrentUrl());
     }
+
     public String getCurrentWebpageUrl() {
         return driver.getCurrentUrl();
     }
-    public boolean isElementSelected(String locator, boolean isWaitRequired)
-    {
-        return getElement(locator,isWaitRequired).isSelected();
+
+    public boolean isElementSelected(String locator, boolean isWaitRequired) {
+        return getElement(locator, isWaitRequired).isSelected();
     }
+
+    public boolean isElementDisplayed(String locator, boolean isWaitRequired) {
+        return getElement(locator, isWaitRequired).isDisplayed();
+    }
+
     public static void navigateBack() {
         driver.navigate().back();
     }
@@ -75,6 +82,7 @@ public class PredefinedActions {
     protected boolean isFieldEnabled(String locator, boolean isWaitRequired) {
         return getElement(locator, isWaitRequired).isEnabled();
     }
+
     protected List<WebElement> getWebElementList(String locator, boolean isWaitRequired) {
         String locatorType = getLocatorType(locator);
         String locatorValue = getLocatorValue(locator);
@@ -91,15 +99,16 @@ public class PredefinedActions {
         log.trace("User is trying to get the list of String");
         return elementListString;
     }
+
     protected List<Double> getWebElementListInDouble(String locator, boolean isWaitRequired) {
         List<WebElement> webElements = getWebElementList(locator, isWaitRequired);
         List<Double> elementListInteger = new ArrayList<>();
         for (WebElement element : webElements) {
             elementListInteger.add(Double.parseDouble(element.getText().
                     replace("+ ", "").
-                    replace(" ","").
+                    replace(" ", "").
                     replace(",", "").
-                    replace("USD","")));
+                    replace("USD", "")));
         }
         log.trace("User is trying to get the list of Double");
         return elementListInteger;

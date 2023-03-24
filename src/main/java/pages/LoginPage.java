@@ -2,14 +2,16 @@ package pages;//import java.util.*;
 
 import base.PredefinedActions;
 import constants.ConstantPaths;
+import org.openqa.selenium.WebElement;
 import utils.PropertyReading;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPage extends PredefinedActions {
 
     private static LoginPage loginPage;
-    private static PropertyReading loginPageProp,configProp;
+    private static PropertyReading loginPageProp, configProp;
 
     private LoginPage() {
         loginPageProp = new PropertyReading(ConstantPaths.PROP_PATH + "LoginPageProp.properties");
@@ -66,6 +68,7 @@ public class LoginPage extends PredefinedActions {
     public String getUsername() {
         return getAttribute(getElement(loginPageProp.getValue("usernameField"), true), "value");
     }
+
     public void enterCredentials(String username, String password) {
         enterText(getElement(loginPageProp.getValue("usernameField"), true), username);
         enterText(getElement(loginPageProp.getValue("passwordField"), false), password);
@@ -75,4 +78,25 @@ public class LoginPage extends PredefinedActions {
         clickOnElement(loginPageProp.getValue("loginBtn"), true);
     }
 
+    public boolean isLogoPresent() {
+        return isElementDisplayed(loginPageProp.getValue("logoLocator"), true);
+    }
+
+    public boolean isUsernameIconPresent() {
+        return isElementDisplayed(loginPageProp.getValue("usernameIcon"), true);
+    }
+
+    public boolean isPasswordIconPresent() {
+        return isElementDisplayed(loginPageProp.getValue("passwordIcon"), true);
+    }
+
+    public List<Boolean> isSocialMediaLoginIcons() {
+        List<WebElement> iconList = getWebElementList(loginPageProp.getValue("iconsSocial"), true);
+        List<Boolean> boolList = new ArrayList<>();
+        for(WebElement element:iconList)
+        {
+            boolList.add(element.isDisplayed());
+        }
+        return boolList;
+    }
 }

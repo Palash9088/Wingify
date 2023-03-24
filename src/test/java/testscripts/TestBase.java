@@ -4,7 +4,6 @@ import base.PredefinedActions;
 import constants.ConstantPaths;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import utils.PropertyReading;
@@ -34,7 +33,7 @@ public class TestBase {
     }
 
 
-     @AfterMethod
+    //@AfterMethod
     public void closeBrowser(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE)
             PredefinedActions.takeScreenshot(result.getName());
