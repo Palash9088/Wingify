@@ -12,6 +12,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -21,6 +23,7 @@ import java.util.List;
 public class PredefinedActions {
     private static WebDriver driver;
     private static WebDriverWait wait;
+    private static Robot robot;
     static Logger log = Logger.getLogger(PredefinedActions.class);
 
     public static void initializeBrowser(String url, String browser, boolean isHeadless) {
@@ -81,6 +84,26 @@ public class PredefinedActions {
 
     protected boolean isFieldEnabled(String locator, boolean isWaitRequired) {
         return getElement(locator, isWaitRequired).isEnabled();
+    }
+
+    protected void clickTabRobot() {
+        try {
+            robot = new Robot();
+            robot.keyPress(KeyEvent.VK_TAB);
+            robot.keyRelease(KeyEvent.VK_TAB);
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void clickEnterRobot() {
+        try {
+            robot = new Robot();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected List<WebElement> getWebElementList(String locator, boolean isWaitRequired) {

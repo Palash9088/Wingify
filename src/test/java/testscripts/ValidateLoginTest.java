@@ -1,6 +1,5 @@
 package testscripts;//import java.util.*;
 
-import base.PredefinedActions;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -25,25 +24,27 @@ public class ValidateLoginTest extends TestBase {
 
     //Validate loginPage logo is visible
     @Test
-    public void validateLoginPageLogoVisibility()
-    {
+    public void validateLoginPageLogoVisibility() {
         LoginPage loginPage = LoginPage.getLoginPage();
-        Assert.assertTrue(loginPage.isLogoPresent(),"Logo not visible");
+        Assert.assertTrue(loginPage.isLogoPresent(), "Logo not visible");
     }
+
+    //Validate socialmedia login icons are visible
     @Test
-    public void validateSocialMediaLoginIcons()
-    {
+    public void validateSocialMediaLoginIcons() {
         LoginPage loginPage = LoginPage.getLoginPage();
         log.info(loginPage.isSocialMediaLoginIcons());
     }
+
     //Validate username & Password icons are visible
     @Test
-    public void validateUsernameAndPasswordIcon(){
+    public void validateUsernameAndPasswordIcon() {
         LoginPage loginPage = LoginPage.getLoginPage();
         Assert.assertTrue(loginPage.isUsernameIconPresent());
         Assert.assertTrue(loginPage.isPasswordIconPresent());
 
     }
+
     //Validate username & Password field is enabled
     @Test
     public void validateUsernameAndPasswordFieldEnabled() {
@@ -106,7 +107,7 @@ public class ValidateLoginTest extends TestBase {
         Assert.assertTrue(loginPage.clickOnRememberMe(),
                 "Remember me checkbox is not selected");
         loginPage.clickOnLoginBtn();
-        PredefinedActions.navigateBack();
+        loginPage.goBackInHistory();
         Assert.assertEquals(loginPage.getUsername(), loginPageCred.get(0),
                 "Remember me function is not working correctly");
         loginPage.clickOnLoginBtn();
@@ -121,6 +122,7 @@ public class ValidateLoginTest extends TestBase {
         Assert.assertNotEquals(loginPage.getUrl(), "https://sakshingp.github.io/assignment/login.html",
                 "User has logged in homepage");
     }
+
     //Validate login with username & password
     @Test
     public void validateLogin() {
@@ -132,6 +134,20 @@ public class ValidateLoginTest extends TestBase {
                 "User is not landed on correct page");
     }
 
+    //Validate Tab & Enter buttons are working in login form
+    @Test
+    public void validateTabAndEnterBtnWorking() {
+        LoginPage loginPage = LoginPage.getLoginPage();
+        loginPage.clickTabOnKeyboard();
+        loginPage.clickTabOnKeyboard();
+        ArrayList<String> loginPageCred = loginPage.getCred();
+        loginPage.enterUsername(loginPageCred.get(0));
+        loginPage.clickTabOnKeyboard();
+        loginPage.enterPassword(loginPageCred.get(1));
+        loginPage.clickTabOnKeyboard();
+        loginPage.clickEnterKeyboard();
+    }
+
     //Validate amount values given are sorted.
     @Test
     public void validateAmountListSorted() {
@@ -140,6 +156,6 @@ public class ValidateLoginTest extends TestBase {
         log.info("Amount List Before click on Table head -> " + homePage.getAmountList());
         homePage.clickOnAmountHead();
         log.info("Amount List After click on Table head -> " + homePage.getAmountList());
-        Assert.assertTrue(homePage.isAmountListSorted(),"List is not sorted");
+        Assert.assertTrue(homePage.isAmountListSorted(), "List is not sorted");
     }
 }

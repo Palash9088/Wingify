@@ -6,14 +6,19 @@
         <classes>
             <class name="testscripts.ValidateLoginTest">
                 <methods>
-                    <include name="validateUserIsAbleToAccessUrlAndOnRightPage"/>
+                    <include name="validateUserIsAbleToAccessUrlAndLandsOnTheLoginPage"/>
+                    <include name="validateLoginPageLogoVisibility"/>
+                    <include name="validateSocialMediaLoginIcons"/>
+                    <include name="validateUsernameAndPasswordIcon"/>
                     <include name="validateUsernameAndPasswordFieldEnabled"/>
                     <include name="validatePlaceholderIsVisible"/>
                     <include name="validateLoginWithoutUsernameAndPassword"/>
                     <include name="validateLoginWithoutPassword"/>
                     <include name="validateLoginWithoutUsername"/>
                     <include name="validateRememberMeFunctionality"/>
+                    <include name="validateLoginWithWhiteSpaces"/>
                     <include name="validateLogin"/>
+                    <include name="validateTabAndEnterBtnWorking"/>
                     <include name="validateAmountListSorted"/>
                 </methods>
             </class>

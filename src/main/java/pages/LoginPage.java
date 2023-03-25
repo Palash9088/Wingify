@@ -73,6 +73,14 @@ public class LoginPage extends PredefinedActions {
         enterText(getElement(loginPageProp.getValue("usernameField"), true), username);
         enterText(getElement(loginPageProp.getValue("passwordField"), false), password);
     }
+    public void enterUsername(String username)
+    {
+        enterText(getElement(loginPageProp.getValue("usernameField"), true), username);
+    }
+    public void enterPassword(String password)
+    {
+        enterText(getElement(loginPageProp.getValue("passwordField"), false), password);
+    }
 
     public void clickOnLoginBtn() {
         clickOnElement(loginPageProp.getValue("loginBtn"), true);
@@ -93,10 +101,22 @@ public class LoginPage extends PredefinedActions {
     public List<Boolean> isSocialMediaLoginIcons() {
         List<WebElement> iconList = getWebElementList(loginPageProp.getValue("iconsSocial"), true);
         List<Boolean> boolList = new ArrayList<>();
-        for(WebElement element:iconList)
-        {
+        for (WebElement element : iconList) {
             boolList.add(element.isDisplayed());
         }
         return boolList;
     }
+
+    public void clickTabOnKeyboard() {
+        clickTabRobot();
+    }
+
+    public void clickEnterKeyboard() {
+        clickEnterRobot();
+    }
+    public void goBackInHistory()
+    {
+        navigateBack();
+    }
+
 }

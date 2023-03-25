@@ -1,0 +1,1 @@
+We can do cross browser testing by changing the config.
