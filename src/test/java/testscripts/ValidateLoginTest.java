@@ -146,6 +146,8 @@ public class ValidateLoginTest extends TestBase {
         loginPage.enterPassword(loginPageCred.get(1));
         loginPage.clickTabOnKeyboard();
         loginPage.clickEnterKeyboard();
+        Assert.assertEquals(loginPage.getUrl(), "https://sakshingp.github.io/assignment/home.html",
+                "User is not landed on correct page");
     }
 
     //Validate amount values given are sorted.
